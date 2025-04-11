@@ -15,7 +15,7 @@ export default function BookEditPage() {
 
   const fetchBook = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/api/books/${id}`);
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${id}`);
       setBook(res.data.book);
     } catch (error) {
       console.error(error);
@@ -25,7 +25,7 @@ export default function BookEditPage() {
   const handleUpdate = async () => {
     try {
       const token = localStorage.getItem('token');
-      const res = await axios.put(`http://localhost:4000/api/books/${id}`, book, {
+      const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${id}`, book, {
         headers: { 'x-auth-token': token }
       });
       setMessage(res.data.msg);
