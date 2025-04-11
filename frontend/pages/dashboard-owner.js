@@ -28,7 +28,7 @@ export default function OwnerDashboard() {
 
   const fetchBooks = async () => {
     try {
-      const res = await axios.get('http://localhost:4000/api/books');
+      const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/books`);
       setBooks(res.data.books);
     } catch (error) {
       console.error(error);
@@ -53,7 +53,7 @@ export default function OwnerDashboard() {
       formData.append('coverImage', coverFile);
 
       const res = await axios.post(
-        'http://localhost:4000/api/books/uploadCover',
+        `${process.env.NEXT_PUBLIC_API_URL}/api/books/uploadCover`,
         formData,
         {
           headers: {
@@ -78,7 +78,7 @@ export default function OwnerDashboard() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      await axios.post('http://localhost:4000/api/books', newBook, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/books`, newBook, {
         headers: { 'x-auth-token': token }
       });
       
@@ -101,7 +101,7 @@ export default function OwnerDashboard() {
   const handleDelete = async (bookId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`http://localhost:4000/api/books/${bookId}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${bookId}`, {
         headers: { 'x-auth-token': token }
       });
       fetchBooks();

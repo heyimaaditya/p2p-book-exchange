@@ -22,7 +22,7 @@ export default function SeekerDashboard() {
   const fetchBooks = async (filters = {}) => {
     try {
       const queryParams = new URLSearchParams(filters).toString();
-      const url = `http://localhost:4000/api/books?${queryParams}`;
+      const url = `${process.env.NEXT_PUBLIC_API_URL}/api/books?${queryParams}`;
       const res = await axios.get(url);
       setBooks(res.data.books);
     } catch (error) {

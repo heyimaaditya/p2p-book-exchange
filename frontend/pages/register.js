@@ -21,7 +21,7 @@ export default function Register() {
     e.preventDefault();
     setMessage('');
     try {
-      const res = await axios.post('http://localhost:4000/api/auth/register', formData);
+      const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/auth/register`, formData);
       setMessage(res.data.msg);
       // After successful registration, redirect to the login page after a short delay
       setTimeout(() => {
